@@ -10,6 +10,8 @@ session_start();
           <h1><a href=" <?= BASE_URL ?>">My blog</a></h1>
         </div>
         <nav class="col-8">
+
+        
           <ul>
             <li><a href="<?= BASE_URL ?>">
                 <i class="fa-solid fa-person"></i> Главная</a></li>
@@ -17,32 +19,32 @@ session_start();
             <li><a href="#">Услуги</a></li>
 
         <li>
-            <?php if(isset($_SESSION['id'])):   ?>
+        <?php if(isset($_SESSION['id'])):   ?>
 
-              <a href="#">
-                <i class="fa fa-user"></i>
-                <?=$_SESSION['login'];?>
-              </a>
-              <ul>
+<a href="#">
+  <i class="fa fa-user"></i>
+  <?=$_SESSION['login'];?>
+</a>
+<ul>
 
 
-              <?php if($_SESSION['admin']):   ?>
-                <li><a href="#">Админ панель</a></li>
-                <?php endif; ?>
+<?php if($_SESSION['admin']):   ?>
+  <li><a href="#">Админ панель</a></li>
+  <?php endif; ?>
 
-                <li><a href="logout.php">Выход</a></li>
-              </ul>
+  <li><a href="logout.php">Выход</a></li>
+</ul>
 
-              <?php  else: ?>
-                <a href="<?php echo BASE_URL. 'log.php'?>"><i class="fa fa-user"></i>Войти</a>
+<?php  else: ?>
+  <a href="<?php echo BASE_URL. 'log.php'?>"><i class="fa fa-user"></i>Войти</a>
 
-            <ul>
-                <li><a href="<?php echo BASE_URL. 'reg.php'?>">Регистрация</a></li>
-                <!-- <li><a href="#">Выход</a></li> -->
-              </ul>
-              <?php endif; ?>
-            
-            
+<ul>
+  <li><a href="<?php echo BASE_URL. 'reg.php'?>">Регистрация</a></li>
+  <!-- <li><a href="#">Выход</a></li> -->
+</ul>
+<?php endif; ?>
+
+
             </li>
 
             
