@@ -2,6 +2,7 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/topics.php'; 
   ?>
 
 <!doctype html>
@@ -50,23 +51,27 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row title-table">
+
+<?php   
+// tt($topics);
+//   die();
+
+?>
+
   <h2>Управление категориями</h2>
   <div class=" col-1">ID</div>
   <div class=" col-5">Название</div>
   <div class=" col-4">Управление</div>
 </div>
+<?php foreach($topics as $key=> $topic){ ?>
 <div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-5">Путешествие</div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-1"><a href="">delete</a></div>
+  <div class="id col-1"><?=$key+1?></div>
+  <!-- <div class="id col-1"><? //=$topic['id']?></div> -->
+  <div class="id col-5"><?=$topic['name']?></div>
+  <div class="red  col-2"><a href="edit.php?id=<?=$topic['id']?>">edit</a></div>
+  <div class="del col-1"><a href="edit.php?delete_id=<?=$topic['id']?>">delete</a></div>
 </div>
-<div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-5">Программирование</div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-1"><a href="">delete</a></div>
-</div>
+<?php }  ?>
 </div>
 </div>
 </div>

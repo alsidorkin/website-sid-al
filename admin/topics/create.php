@@ -2,6 +2,11 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/topics.php'; 
+  // $name='';
+  // $description='';
+// tt($name);
+//   exit();
   ?>
 
 <!doctype html>
@@ -53,18 +58,18 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <div class="row title-table">
   <h2>Создать категорию</h2>
 </div>
-
 <div class="row add-post">
- <form action="creat.php" method='post'>
+<div class="mb-12 col-12 col-md-12 err"><p><?=$errMsg;?></p></div>
+ <form action="create.php" method='post'>
     <div class="col">
-        <input type="text" class="form-control" placeholder="Имя категории" aria-label="Имя категории">
+        <input type="text" name ='name' value="<?=$name;?>" class="form-control" placeholder="Имя категории" aria-label="Имя категории">
     </div>
     <div class="col">
   <label for="content" class="form-label">Описание категории</label>
-  <textarea class="form-control" id="content" rows="6"></textarea>
+  <textarea class="form-control" name ='description' id="content" rows="6"><?=$description;?></textarea>
 </div>
 <div class="col">
-    <button class="btn btn-primary" type="submit">Создать категорию</button>
+    <button class="btn btn-primary" name ='topic-create' type="submit">Создать категорию</button>
   </div>
 
  </form>

@@ -2,6 +2,9 @@
 session_start();
 
   require_once 'path.php'; 
+  //  require_once 'app/database/db.php';
+  require_once 'app/controllers/topics.php';        
+        
   ?>
 
 <!doctype html>
@@ -214,13 +217,11 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
     <h3>Категории</h3>
   
     <ul>
-      <li><a href="#">Статьи</a></li>
-      <li><a href="#">Пчелы в медицине</a></li>
-      <li><a href="#">Приемы пчеловождения</a></li>
-      <li><a href="#">Пчелоинвентарь</a></li>
-      <li><a href="#">Роение</a></li>
-      <li><a href="#">Системы улья</a></li>
-      <li><a href="#">Пчеловодческий сезон</a></li>
+
+    <?php
+    foreach($topics as $key=> $topic){ ?>
+      <li><a href="#"> <?= $topic['name'] ;?></a></li>
+     <?php  }?>
     </ul>
   
   </div>

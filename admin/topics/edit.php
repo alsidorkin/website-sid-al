@@ -2,10 +2,11 @@
 session_start();
 
   require_once '../../path.php'; 
-  require_once '../../app/controllers/posts.php'; 
-
-  // tt ();
-  // exit();
+  require_once '../../app/controllers/topics.php'; 
+  // $name='';
+  // $description='';
+// tt($name);
+//   exit();
   ?>
 
 <!doctype html>
@@ -41,42 +42,39 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <!-- END HEADER -->
   
 <div class="container">
+
+<!-- sidebar start -->
 <?php require_once '../../app/include/sidebar-admin.php';?>
+<!-- sidebar end -->
 
 <div class="posts col-8">
 <div class="button row">
-<a href="<?= BASE_URL . "admin/posts/create.php" ?>" class="col-2 btn btn-success">Создать</a>
+<a href="<?= BASE_URL . "admin/topics/create.php" ?>" class="col-2 btn btn-success">Создать</a>
 <span class="col-1"></span>
-<a href="<?= BASE_URL . "admin/posts/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
+<a href="<?= BASE_URL . "admin/topics/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
 
 </div>
 
 <div class="row title-table">
-  <h2>Управление записями</h2>
-  <div class=" col-1">ID</div>
-  <div class=" col-3">Название</div>
-  <div class="  col-2">Автор</div>
-  <div class=" col-6">Управление</div>
-  <!-- <div class="id col-1">ID</div>
-  <div class="id col-1">ID</div> -->
+  <h2>Обновление категории</h2>
 </div>
+<div class="row add-post">
+<div class="mb-12 col-12 col-md-12 err"><p><?=$errMsg;?></p></div>
+ <form action="edit.php" method='post'>
+     <input type="hidden" name ='id' value="<?=$id;?>">
+    <div class="col">
+        <input type="text" name ='name' value="<?=$name;?>" class="form-control" placeholder="Имя категории" aria-label="Имя категории">
+    </div>
+    <div class="col">
+  <label for="content" class="form-label">Описание категории</label>
+  <textarea class="form-control" name ='description' id="content" rows="6"><?=$description;?></textarea>
+</div>
+<div class="col">
+    <button class="btn btn-primary" name ='topic-edit' type="submit">Обновить категорию</button>
+  </div>
 
-<?php foreach($postsAdm as $key=>$post){ ?>
-<div class="row post">
-  <div class="id col-1"> <?=$key+1?></div>
-  <div class="id col-3"> <?=$post['title'] ?></div>
-  <div class="title  col-2"><?=$post['username'] ?></div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-2"><a href="">delete</a></div>
-  <?php if($post['status']){ ?>
-  <div class="status col-2"><a href="">unpublish</a></div>
-  <?php }else { ?>
-  <div class="status col-2"><a href="">publish</a></div>
-  <?php  }  ?>
-  <!-- <div class="id col-1">ID</div>
-  <div class="id col-1">ID</div> -->
+ </form>
 </div>
-<?php }  ?>
 </div>
 </div>
 </div>
@@ -115,3 +113,10 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </body>
 
 </html>
+
+
+
+
+
+
+
