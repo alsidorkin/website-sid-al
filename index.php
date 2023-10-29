@@ -4,7 +4,10 @@ session_start();
   require_once 'path.php'; 
   //  require_once 'app/database/db.php';
   require_once 'app/controllers/topics.php';        
-        
+  require_once 'app/controllers/posts.php';  
+  
+  // tt($postsAdm);
+  //    exit();
   ?>
 
 <!doctype html>
@@ -97,98 +100,25 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <div class="main-conent col-md-9 col-12">
 
         <h2>Последние публикации</h2>
-
+        <?php
+foreach($postsAdm as $post){
+  ?><?//=  ROOT_PATH. "\assets\images\posts\\" .$post['img'];?>
         <div class="post row">
           <div class="img col-12 col-md-4">
-            <img src="assets/images/foto_bee/bee10.jpg" alt="" class="img-thumbnail">
+          <img src="<?php //echo ROOT_PATH. "\assets\images\posts\bee10.jpg" ;?>" alt="" class="img-thumbnail">
           </div>
           <div class="post_text col-12 col-md-8">
             <h3>
-              <a href="#">Прикольная статья на тему диких пчел...</a>
+              <a href="#"><?=$post['title']?></a>
             </h3>
-            <i class="far fa-user">Имя автора</i>
-            <i class="far fa-calendar ">Август 18,2023</i>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
+            <i class="far fa-user"><?=$post['username']?></i>
+            <i class="far fa-calendar "><?=$post['created_data']?></i>
+            <p class="preview-text"><?=$post['content']?></p>
           </div>
         </div>
-
-
-        <div class="post row">
-          <div class="img col-12 col-md-4">
-            <img src="assets/images/foto_bee/bee10.jpg" alt="" class="img-thumbnail">
-          </div>
-          <div class="post_text col-12 col-md-8">
-            <h3>
-              <a href="#">Прикольная статья на тему диких пчел...</a>
-            </h3>
-            <i class="far fa-user">Имя автора</i>
-            <i class="far fa-calendar ">Август 18,2023</i>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-          </div>
-        </div> 
+<?php }?>
 
         
-         <div class="post row">
-          <div class="img col-12 col-md-4">
-            <img src="assets/images/foto_bee/bee10.jpg" alt="" class="img-thumbnail">
-          </div>
-          <div class="post_text col-12 col-md-8">
-            <h3>
-              <a href="#">Прикольная статья на тему диких пчел...</a>
-            </h3>
-            <i class="far fa-user">Имя автора</i>
-            <i class="far fa-calendar ">Август 18,2023</i>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-          </div>
-        </div>
-
-
-        <div class="post row">
-          <div class="img col-12 col-md-4">
-            <img src="assets/images/foto_bee/bee8.jpg" alt="" class="img-thumbnail">
-          </div>
-          <div class="post_text col-12 col-md-8">
-            <h3>
-              <a href="#">Прикольная статья на тему диких пчел...</a>
-            </h3>
-            <i class="far fa-user">Имя автора</i>
-            <i class="far fa-calendar ">Август 18,2023</i>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-          </div> 
-     </div>
-
-        <div class="post row">
-          <div class="img col-12 col-md-4">
-            <img src="assets/images/foto_bee/bee9.jpg" alt="" class="img-thumbnail">
-          </div>
-          <div class="post_text col-12 col-md-8">
-            <h3>
-              <a href="#">Прикольная статья на тему диких пчел...</a>
-            </h3>
-            <i class="far fa-user">Имя автора</i>
-            <i class="far fa-calendar ">Август 18,2023</i>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-          </div>
 
 
 

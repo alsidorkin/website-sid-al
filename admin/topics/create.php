@@ -59,7 +59,10 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <h2>Создать категорию</h2>
 </div>
 <div class="row add-post">
-<div class="mb-12 col-12 col-md-12 err"><p><?=$errMsg;?></p></div>
+<div class="mb-12 col-12 col-md-12 err">
+  <!-- вывод массива с ошибками -->
+  <?php require_once '../../app/helps/errorInfo.php'; ?>
+</div>
  <form action="create.php" method='post'>
     <div class="col">
         <input type="text" name ='name' value="<?=$name;?>" class="form-control" placeholder="Имя категории" aria-label="Имя категории">

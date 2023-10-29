@@ -3,7 +3,7 @@
 include("app/database/db.php");
 
 $isSubmit=false;
-$errMsg='';
+$errMsg=[];
 $regStatus='';
 
 
@@ -36,13 +36,13 @@ $passS=trim($_POST['pass-second']);
 
 
 if($login===''||$email===''||$passF===''||$passS===''){// проверка на заполнение всех полей
-  $errMsg='Не все поля заполнены!!!';
+ array_push($errMsg,"Не все поля заполнены!!!");
 }
 else if(mb_strlen($login,'UTF8')<2){// проверка на количество символов логина
-  $errMsg='Логин должен быть больше 2-х символов!!!';
+ array_push($errMsg,"Логин должен быть больше 2-х символов!!!");
 }
 else if($passF!==$passS){// проверка на одинаковость паролей
-  $errMsg='Пароли в обеих полях должны быть одинаковы!!!';
+ array_push($errMsg,"Пароли в обеих полях должны быть одинаковы!!!");
 }
 else {
 
@@ -50,7 +50,7 @@ $existance=selectOne('users',['email'=>$email]);
 // tt($existance);
    //  exit();
 if($existance &&$existance['email']===$email){
-  $errMsg='Пользователь с такими данными уже существует!!!';
+ array_push($errMsg,"Пользователь с такими данными уже существует!!!");
 }else {
 
   $pass=password_hash($passS,PASSWORD_BCRYPT) ;
@@ -63,7 +63,7 @@ if($existance &&$existance['email']===$email){
     ];
   
        $id=insert('users',$post);
-      //  $errMsg='Пользователь '. $login.' успешно зарегистрирован!!';
+      // array_push($errMsg,"Пользователь '. $login.' успешно зарегистрирован!!';
       $user=selectOne('users',['id'=>$id]);
 
       loginUser($existance);
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST'&& isset($_POST['button-log'])){
     $email=trim($_POST['email']);
     $pass=trim($_POST['password']);
     if($email===''||$pass===''){// проверка на заполнение всех полей
-      $errMsg='Не все поля заполнены!!!';
+     array_push($errMsg,"Не все поля заполнены!!!");
     }else{
 
       $existance=selectOne('users',['email'=>$email]);
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST'&& isset($_POST['button-log'])){
       }else {
         //ошибка авторизации
         
-        $errMsg='Почта либо пароль введены не правильно!!!';
+       array_push($errMsg,"Почта либо пароль введены не правильно!!!");
         // if (isset($_SESSION['session_start_time']) && (time() - $_SESSION['session_start_time']) > $sessionTimeout) {
           //  $_SESSION['login_attempts'] = 0;
         // }

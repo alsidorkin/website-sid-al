@@ -53,15 +53,18 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
-<div class="mb-12 col-12 col-md-12 err"><p><?=$errMsg;?></p></div>
+<div class="mb-12 col-12 col-md-12 err">
+  <!-- вывод массива с ошибками -->
+  <?php require_once '../../app/helps/errorInfo.php'; ?>
+</div>
 
- <form action="create.php" method='post'>
+ <form action="create.php" method='post'  enctype="multipart/form-data">
     <div class="col mb-4" >
-        <input name='title' type="text" class="form-control" placeholder="Название" aria-label="Название">
+        <input name='title' value='<?=$title?>' type="text" class="form-control" placeholder="Название" aria-label="Название">
     </div>
     <div class="col">
   <label for="editor" class="form-label ">Содержимое записи</label>
-  <textarea id='editor'name='content' class="form-control" rows="6"></textarea>
+  <textarea id='editor'name='content' class="form-control" rows="6"><?=$content?></textarea>
 </div>
 <div class="input-group col mb-4 mt-4">
   <input type="file" name='img' class="form-control" id="inputGroupFile02">
@@ -75,12 +78,6 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
  
   <?php }  ?>
 </select>
-<!-- <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label> -->
-<!-- </div> -->
 <div class="form-check">
   <input name='publish' class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
   <label class="form-check-label" for="flexCheckChecked">

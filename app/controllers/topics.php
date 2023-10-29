@@ -1,7 +1,7 @@
 <?php 
 require_once __DIR__ . '/../../app/database/db.php';
 // require_once  'app/database/db.php';
-$errMsg='';
+$errMsg=[];
 $id='';
 $name='';
 $description='';
@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD']==='POST' &&isset($_POST['topic-create'])){
   
   
   if($name===''||$description===''){// проверка на заполнение всех полей
-    $errMsg='Не все поля заполнены!!!';
+    array_push($errMsg,"Не все поля заполнены!!!");
   }
   else if(mb_strlen($name,'UTF8')<2){// проверка на количество символов логина
-    $errMsg='Категория должена быть больше 2-х символов!!!';
+    array_push($errMsg,"Категория должена быть больше 2-х символов!!!");
   }
   else {
   
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST' &&isset($_POST['topic-create'])){
   // tt($existance);
      //  exit();
   if($existance &&$existance['name']===$name){
-    $errMsg='Категория с таким названием уже существует!!!';
+    array_push($errMsg,"Категория с таким названием уже существует!!!");
   }else {
   
     $topic=[
@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD']==='POST' &&isset($_POST['topic-create'])){
   
   
   if($name===''||$description===''){// проверка на заполнение всех полей
-    $errMsg='Не все поля заполнены!!!';
+    array_push($errMsg,"Не все поля заполнены!!!");
   }
   else if(mb_strlen($name,'UTF8')<2){// проверка на количество символов категории
-    $errMsg='Категория должна быть больше 2-х символов!!!';
+    array_push($errMsg,"Категория должна быть больше 2-х символов!!!");
   }
   // else {
   

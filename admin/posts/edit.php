@@ -2,6 +2,18 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/posts.php'; 
+  
+  // $name='';
+  // $description='';
+  // $id=$post['id'];
+  // // tt($id);
+  // $title=$post['title'];
+  // $content=$post['content'];
+  // $topic=$post['id_topic'];
+  // $publish=$post['status'];
+  // // tt($id);
+  // exit();
   ?>
 
 <!doctype html>
@@ -37,59 +49,81 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <!-- END HEADER -->
   
 <div class="container">
+
 <!-- sidebar start -->
 <?php require_once '../../app/include/sidebar-admin.php';?>
 <!-- sidebar end -->
+
 <div class="posts col-8">
-<div class="button row">
-<a href="<?= BASE_URL . "admin/users/create.php" ?>" class="col-2 btn btn-success">Создать</a>
-<span class="col-1"></span>
-<a href="<?= BASE_URL . "admin/users/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
-
-</div>
-
-
 <div class="row title-table">
-  <h2>Создание пользователя</h2>
+  <h2>Обновление записи</h2>
 </div>
-
 <div class="row add-post">
 <div class="mb-12 col-12 col-md-12 err">
   <!-- вывод массива с ошибками -->
-  <?php require_once '../../app/helps/errorInfo.php'; ?>
-</div>
- <form action="creat.php" method='post'>
+  <?php 
+  // require_once '../../app/helps/errorInfo.php';
+  // echo $errMsg1;
+// tt($errMsg);
+if(count($errMsg) > 0){?>
+  <ul>
+  <?php foreach($errMsg as $err) { ?>
+  
+      <li><?=$err?></li>
+  <?php } ?>
+  </ul>
+  <?php } ?>
 
- <div class="col">
-        <label for="formGroupExampleInput" class="form-label">Логин</label>
-        <input name="login" value="<?//=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите ваш логин...">
-      </div>
-      <div class="w-100"></div>
-    <div class="col">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input name="email" value="<?//=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Введите вашу почту...">
-      <div id="emailHelp" class="form-text"></div>
+ 
+  
+</div>
+<form action="edit.php" method='post' enctype="multipart/form-data">
+    <div class="col mb-4" >
+        <input name='title' value='<?=$title?>' type="text" class="form-control" placeholder="Название" aria-label="Название">
     </div>
-    <div class="w-100"></div>
+    <input type="hidden" name ='id' value="<?=$id?>">
     <div class="col">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1"placeholder="Введите ваш пароль...">
-    </div>
-    <div class="w-100"></div>
-    <div class="col">
-      <label for="exampleInputPassword2" class="form-label">Password</label>
-      <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2"placeholder="Введите ваш пароль еще раз...">
-    </div>
-    <select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">User</option>
-  <option value="2">Admin</option>
+  <label for="editor" class="form-label ">Содержимое записи</label>
+  <textarea id='editor'name='content' class="form-control" rows="6"><?=$content?></textarea>
+</div>
+<div class="input-group col mb-4 mt-4">
+  <input type="file" name='img'  class="form-control" id="inputGroupFile02">
+  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+</div>
+<select class="form-select mb-2" name='topic' aria-label="Default select example">
+<!-- <option selected>Выбор категории:</option> value="<?//=$img?>"-->
+<?php
+foreach($topics as $key=> $topic){ ?>
+  
+  <option  value="<?=$topic['id'];?>"><?=$topic['name']?></option>
+ 
+  <?php }  ?>
 </select>
 
-<div class="col">
-    <button class="btn btn-primary" type="submit">Создать</button>
+<!-- <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    Default checkbox
+  </label> -->
+<!-- </div> -->
+<div class="form-check">
+  <?php if(empty($publish)&&$publish==0){?>
+  <input name='publish' class="form-check-input" type="checkbox"  id="flexCheckChecked">
+  <label class="form-check-label" for="flexCheckChecked">
+  Publish
+  </label>
+  <?php }else{?>
+    <input name='publish' class="form-check-input" type="checkbox"  id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+  Publish
+  </label>
+  <?php }?>
+</div>
+
+<div class="col col-6">
+    <button class="btn btn-primary" name='post_edit' type="submit">Сохранить запись</button>
   </div>
-  
+
  </form>
 </div>
 </div>
@@ -130,3 +164,11 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </body>
 
 </html>
+
+<?php //tt($topics);
+//exit();  ?>
+
+
+
+
+
