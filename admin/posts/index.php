@@ -3,9 +3,6 @@ session_start();
 
   require_once '../../path.php'; 
   require_once '../../app/controllers/posts.php'; 
-
-  // tt ();
-  // exit();
   ?>
 
 <!doctype html>
@@ -64,7 +61,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <?php foreach($postsAdm as $key=>$post){ ?>
 <div class="row post">
   <div class="id col-1"> <?=$key+1?></div>
-  <div class="id col-3"> <?=$post['title'] ?></div>
+  <div class="id col-3"> <?=mb_substr($post['title'],0,25,'UTF-8').'...'?></div>
   <div class="title  col-2"><?=$post['username'] ?></div>
   <div class="red  col-2"><a href="edit.php?id=<?=$post['id']?>">edit</a></div>
   <div class="del col-2"><a href="edit.php?delete_id=<?=$post['id']?>">delete</a></div>
@@ -73,20 +70,13 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <?php }else { ?>
   <div class="status col-2"><a href="edit.php?publish=1&pub_id=<?=$post['id']?>">publish</a></div>
   <?php  }  ?>
-  <!-- <div class="id col-1">ID</div>
-  <div class="id col-1">ID</div> -->
 </div>
 <?php }  ?>
 </div>
 </div>
 </div>
- 
-   
-
-  
 
 <!-- FOOTER  -->
-
 <?php 
   require_once '../../app/include/footer.php'; 
   ?>

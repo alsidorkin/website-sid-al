@@ -2,12 +2,21 @@
 session_start();
 
   require_once 'path.php'; 
-  //  require_once 'app/database/db.php';
-  require_once 'app/controllers/topics.php';        
-  require_once 'app/controllers/posts.php';  
+  require_once 'app/controllers/topics.php';     
   
-  // tt($postsAdm);
-  //    exit();
+  $page=isset($_GET['page']) ? $_GET['page']:1 ;
+  $limit=4;
+  $offset= $limit * $page;
+  $total_pages= round(countRow('posts')/$limit,0);
+    
+  $posts = selectAllFromPostsWithUsersOneIndex('posts','users', $limit , $offset);
+  $topTopics =selectTopTopicFromPostsOneIndex('posts');
+ 
+
+
+//  tt($total_pages);
+//      exit();
+
   ?>
 
 <!doctype html>
@@ -35,7 +44,6 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </head>
 
 <body>
-
 <!-- HEADER -->
 <?php 
   require_once 'app/include/header.php'; 
@@ -50,14 +58,23 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 
       <div class="carousel-inner">
+      <?php
+      foreach($topTopics as $key=> $post){
+        if($key == 0){?>
         <div class="carousel-item active">
-          <img src="assets/images\foto_bee\bee3.jpg" class="d-block w-100" alt="...">
+          <?php }else{?>
+            <div class="carousel-item">
+        <?php }?>
+          <img src="<?=BASE_URL."/assets/images/posts/" . $post['img'] ;?>" alt="<?=$post['title']?>" class="d-block w-100">
           <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-            <h5><a href="/"> First slide label</a></h5>
+            <h5> <a href="<?=BASE_URL."single.php?post=" . $post['id'] ;?>"><?= substr($post['title'],0)?></a></h5>
           </div>
         </div>
+        <?php }?>
 
-        <div class="carousel-item">
+
+
+        <!-- <div class="carousel-item">
           <img src="assets/images\foto_bee\bee5.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption-hack carousel-caption d-none d-md-block">
             <h5><a href="/">Second slide label</a></h5>
@@ -69,7 +86,8 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
           <div class="carousel-caption-hack carousel-caption d-none d-md-block">
             <h5><a href="/">Third slide label</a></h5>
           </div>
-        </div>
+        </div> -->
+
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -88,8 +106,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <!-- блок карусели end  -->
 
  
-   
-
+  
   <!-- блок main start  -->
   <div class="container">
     <div class="content row">
@@ -101,30 +118,62 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 
         <h2>Последние публикации</h2>
         <?php
-foreach($postsAdm as $post){
-  ?><?//=  ROOT_PATH. "\assets\images\posts\\" .$post['img'];?>
+foreach($posts as $post){
+  ?><?php //tt($post);   exit()?>
         <div class="post row">
           <div class="img col-12 col-md-4">
-          <img src="<?php //echo ROOT_PATH. "\assets\images\posts\bee10.jpg" ;?>" alt="" class="img-thumbnail">
+          <img src="<?=BASE_URL."/assets/images/posts/" . $post['img'] ;?>" alt="<?=$post['title']?>" class="img-thumbnail">
           </div>
           <div class="post_text col-12 col-md-8">
             <h3>
-              <a href="#"><?=$post['title']?></a>
+
+            <?php 
+            if(strlen($post['title'])<35){ 
+?>
+              <a href="<?=BASE_URL."single.php?post=" . $post['id'] ;?>"><?=$post['title']?></a>
+              <?php }else{?>
+              <a href="<?=BASE_URL."single.php?post=" . $post['id'] ;?>"><?= substr($post['title'],0,45).'...'?></a>
+              <?php }?>
             </h3>
             <i class="far fa-user"><?=$post['username']?></i>
             <i class="far fa-calendar "><?=$post['created_data']?></i>
-            <p class="preview-text"><?=$post['content']?></p>
+
+            <!-- <p class="preview-text"><?//=substr($post['content'],0,420).'...'?></p> -->
+            <p class="preview-text"><?=mb_substr($post['content'],0,254,'UTF-8').'...'?></p>
           </div>
         </div>
 <?php }?>
-
-        
-
-
-
-  
-          
+         
         </div>
+
+        <!-- sidebar content -->
+ <div class="sidebar col-md-3 col-12 ">
+
+<div class="section search">
+  <h3>Search</h3>
+  <form action="search.php" method="post">
+    <input type="text" name="search-term" class="text-input" placeholder="Введите искомое слово...">
+  </form>
+</div>
+
+
+<div class="section topics">
+  <h3>Категории</h3>
+
+  <ul>
+
+  <?php
+  foreach($topics as $key=> $topic){ ?>
+    <li><a href="<?=BASE_URL."category.php?id=" .$topic['id']?>"> <?= $topic['name'] ;?></a></li>
+   <?php  }?>
+  </ul>
+
+</div>
+
+
+      </div>
+<!-- sidebar content end-->
+
 
 
 
@@ -132,37 +181,15 @@ foreach($postsAdm as $post){
 <!-- блок main content end   -->
 
 
- <!-- sidebar content -->
- <div class="sidebar col-md-3 col-12 ">
-
-  <div class="section search">
-    <h3>Search</h3>
-    <form action="index.php" method="post">
-      <input type="text" name="search-term" class="text-input" placeholder="Введите искомое слово...">
-    </form>
-  </div>
-  
-  
-  <div class="section topics">
-    <h3>Категории</h3>
-  
-    <ul>
-
-    <?php
-    foreach($topics as $key=> $topic){ ?>
-      <li><a href="#"> <?= $topic['name'] ;?></a></li>
-     <?php  }?>
-    </ul>
-  
-  </div>
-  
-  
-        </div>
-  <!-- sidebar content end-->
+ 
 
  
     </div>
-
+<!-- пагинация start -->
+<?php 
+  require_once 'app/include/pagination.php'; 
+  ?>
+  <!-- пагинация end -->
   </div>
 
   <!-- блок main end  -->

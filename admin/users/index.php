@@ -2,6 +2,7 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/users.php';
   ?>
 
 <!doctype html>
@@ -52,26 +53,27 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <div class="row title-table">
   <h2>Управление пользователями</h2>
   <div class=" col-1">ID</div>
-  <div class=" col-5">Логин</div>
+  <div class=" col-2">Логин</div>
+  <div class=" col-3">Email</div>
   <div class="  col-2">Роль</div>
   <div class=" col-4">Управление</div>
   <!-- <div class="id col-1">ID</div>
   <div class="id col-1">ID</div> -->
 </div>
+<?php foreach($users as $key=> $user){ ?>
 <div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-5">Alexandr80</div>
+  <div class="id col-1"><?=$key+1?></div>
+  <div class="id col-2"><?=$user['username']?></div>
+  <div class="id col-3"><?=$user['email']?></div>
+  <?php if($user['admin']){?>
   <div class="title  col-2">Аdmin </div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-1"><a href="">delete</a></div>
+  <?php }else{?>
+    <div class="title  col-2">User </div>
+    <?php }?>
+  <div class="red  col-2"><a href="edit.php?id=<?=$user['id']?>">edit</a></div>
+  <div class="del col-2"><a href="index.php?delete_id=<?=$user['id']?>">delete</a></div>
 </div>
-<div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-5">Masha90</div>
-  <div class="title  col-2">User</div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-1"><a href="">delete</a></div>
-</div>
+<?php }  ?>
 </div>
 </div>
 </div>

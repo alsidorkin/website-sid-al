@@ -39,11 +39,11 @@ if (!empty($_FILES['img']['name'])) {
   array_push($errMsg, "Ошибка получения картинки!!!");
 }
 
-$id = $_POST['id'];
+//$id = $_POST['id'];
 
-$img = isset($_POST['img']) ? trim($_POST['img']) : '';
+// $img = isset($_POST['img']) ? trim($_POST['img']) : '';
 
-if (!empty($img)) {
-  update('posts', $id, ['img' => $_POST['img']]);
-  header('location: ../../admin/posts/index.php ');
-}
+// if (!empty($img)) {
+//   update('posts', $id, ['img' => $img]);
+//   header('location: ../../admin/posts/index.php ');
+// }

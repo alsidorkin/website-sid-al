@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
   require_once '../../app/helps/changeImage.php';
 
   // код для добавления записей
+  // $id = $postsAdm['id'];
   $title = trim($_POST['title']);
   $content = trim($_POST['content']);
   $topic = trim($_POST['topic']);
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
   } else if (mb_strlen($title, 'UTF8') < 7) { // проверка на количество символов логина
     array_push($errMsg, "Название статьи должен быть больше 7-ми символов!!!");
   } else {
-
+    if (!empty($img)) {
     $contents = [
       'id_user' => $_SESSION['id'],
       'title' => $title,
@@ -42,10 +43,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
       'status' => $publish,
       'id_topic' => $topic,
     ];
-
+   
     $post = insert('posts', $contents);
     header('location: ../../admin/posts/index.php ');
   }
+  else {
+    $contents = [
+      'id_user' => $_SESSION['id'],
+      'title' => $title,
+      'content' => $content,
+      'status' => $publish,
+      'id_topic' => $topic,
+    ];
+   
+    $post = insert('posts', $contents);
+    header('location: ../../admin/posts/index.php ');
+  }
+}
 } else {
   // сохранение значений инпутов логин и имейл
 
@@ -106,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_edit'])) {
   // сохранение значений инпутов логин и имейл
 
   $publish = isset($_POST['publish']) ? 1 : 0;
-  ;
+ 
 
 }
 

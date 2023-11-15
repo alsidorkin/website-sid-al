@@ -15,8 +15,9 @@ session_start();
           <ul>
             <li><a href="<?= BASE_URL ?>">
                 <i class="fa-solid fa-person"></i> Главная</a></li>
-            <li><a href="<?= BASE_URL.'about.php'?>">О нас</a></li>
-            <li><a href="#">Услуги</a></li>
+            <li><a href="<?= BASE_URL.'about.php'?>">
+            <i class="fa-solid fa-image"></i></i>О нас</a></li>
+            <li><a href="#"> <i class="fa-solid fa-heart"></i></i> Услуги</a></li>
 
         <li>
         <?php if(isset($_SESSION['id'])):   ?>

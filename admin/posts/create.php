@@ -71,7 +71,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <label class="input-group-text" for="inputGroupFile02">Upload</label>
 </div>
 <select class="form-select mb-2" name='topic' aria-label="Default select example">
-<option selected>Выбор категории:</option>
+<!-- <option selected>Выбор категории:</option> -->
 <?php foreach($topics as $key=> $topic){ ?>
   
   <option value="<?=$topic['id'];?>"><?=$topic['name']?></option>
@@ -94,11 +94,6 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 </div>
 </div>
- 
-   
-
-  
-
 <!-- FOOTER  -->
 
 <?php 

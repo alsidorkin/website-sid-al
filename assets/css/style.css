@@ -121,11 +121,12 @@ padding: 30px;
     }    
     
     .carousel{
-        height: 400px;
+        height: 300px;
+     
     }
 
     .carousel-inner, .carousel-item{
-        height: 400px;
+        height: 300px;
          border-radius: 4px;
     }
 
@@ -153,9 +154,9 @@ padding: 30px;
     }
 
     .carousel-caption h5 a{
-color: #ffffff;
-text-decoration: none;
-font-weight: 500;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
     }
     .carousel-caption h5 a:hover{
 
@@ -253,7 +254,8 @@ font-size: 1.2em;
     background: #303036;
     color: #d3d3d3;
     position: relative;
-    /* min-height: 100px;  */
+    min-height: 100px; 
+    /* height: 230px;  */
 }
 
 .footer .footer-section{
@@ -317,7 +319,7 @@ font-size: 1.2em;
     padding: 0.9rem 1.4rem;
     border: none;
     width: 100%;
-    height: 70px;
+    height: 40px;
 }
 
 .footer .contact-form .contact-input:focus{
@@ -401,6 +403,59 @@ transition: all .3s;
     font-style: italic;
     font-size: 0.8rem;
    }
+
+
+
+
+
+
+
+  
+
+
+
+
+   /* .b-footer {
+    background: #000;
+    color: #777;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+    display: block;
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+таблица стилей агента пользователя
+footer {
+    display: block;
+}
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
