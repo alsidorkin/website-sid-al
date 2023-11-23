@@ -7,6 +7,12 @@ function tt($value){
     print_r($value);
     echo '</pre>';
 }
+function tte($value){
+    echo '<pre>';
+    print_r($value);
+    echo '</pre>';
+     exit();
+}
 // проверка выполнения запроса к бд
 function dbCheckError($query){
     $errInfo = $query->errorInfo();

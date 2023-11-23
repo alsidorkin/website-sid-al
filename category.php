@@ -5,7 +5,14 @@ session_start();
   //  require_once 'app/database/db.php';
   require_once 'app/controllers/topics.php';        
   // require_once 'app/controllers/posts.php';   <?php }else{ <?php  } 
-  
+  $page=isset($_GET['page']) ? $_GET['page']:1 ;
+  $limit=2;
+  $offset= $limit * $page;
+  $total_pages= round(countRow('posts')/$limit,0);
+    
+  $posts = selectAllFromPostsWithUsersOneIndex('posts','users', $limit , $offset);
+  // $topTopics =selectTopTopicFromPostsOneIndex('posts');
+ 
   
  $posts = selectAll('posts',['id_topic'=>$_GET['id']]);
  $topTopics =selectTopTopicFromPostsOneIndex('posts');
@@ -126,7 +133,11 @@ foreach($posts as $post){
       </div>
 <!-- sidebar content end-->
 
-
+<!-- пагинация start -->
+<?php 
+  require_once 'app/include/pagination.php'; 
+  ?>
+  <!-- пагинация end -->
 </div>
 <!-- блок main content end   -->
 

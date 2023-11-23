@@ -2,10 +2,10 @@
 session_start();
 
   require_once 'path.php'; 
-   require_once 'app/database/db.php';
+  //  require_once 'app/database/db.php';
   require_once 'app/controllers/topics.php';        
   require_once 'app/controllers/posts.php';  
-  
+  require_once SITE_ROOT.'/app/controllers/commentaries.php';
   
 //  $posts = selectAllFromPostsWithUsersOneIndex('posts','users');
 //  $post = selectOne('posts',['id'=>$_GET['post']]);
@@ -14,6 +14,9 @@ session_start();
 $post=selectPostFromPostsWithUsersOneSingle('posts','users',$_GET['post']);
 //  tt($post);
 //      exit();
+
+
+
    ?>
 
 <!doctype html>
@@ -50,20 +53,30 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 
  
   
+
+
+
+
   <!-- блок main start  -->
   <div class="container">
+
+
     <div class="content row">
 
      
-        
+    
+    
+
+
+
       <!-- main content -->
-<div class="main-conent col-md-9 col-12">
+      <div class="main-conent col-md-9 col-12">
+  <!-- main content -->
 
        
 
 
-</div>
-<!-- блок main content end   -->
+
 <h2><?=$post['title']?></h2>
 
         <div class="single_post row">
@@ -81,12 +94,24 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
            
                                 
           </div>
+         
+          <!-- комментарии start -->
+          <?php require_once 'app/include/comments.php'; ?>
+          <!-- комментарии end -->
+
 
         </div>
  
       
- 
+        <!-- блок main content end   -->
+        </div>
+<!-- блок main content end   -->
+
+
+
     </div>
+
+
 
   </div>
 
